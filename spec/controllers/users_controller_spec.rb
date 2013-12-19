@@ -7,8 +7,11 @@ describe UsersController do
   end
 
   describe "#create" do
-    it "creates a new user" do
+    it "creates a new user with valid username and password" do
       FactoryGirl.create(:user).should be_valid
+    end
+    it "does not create user with bad info" do
+      FactoryGirl.create(:user, :username => '').should raise_error
     end
     it "logs in a user on sign up"
   end
