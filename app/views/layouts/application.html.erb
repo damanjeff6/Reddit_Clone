@@ -7,6 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- this garbage should go in a partial -->
+  <!-- doublecheck fancy ned style -->
+  <% if flash[:errors] && flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
+  <% end %>
+
+<% if logged_in? %>
+  <p>Hello, <%= current_user.username %><p>
+  <%= button_to "Log out", session_url, :method => :delete %>
+<% else %>
+  <p><%= link_to "Log in", new_session_url %></p>
+  <p><%= link_to "Sign up", new_user_url %></p>
+<% end %>
 
 <%= yield %>
 

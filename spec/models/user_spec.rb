@@ -6,6 +6,12 @@ describe User do
   it { should_not allow_mass_assignment_of(:session_token) }
   it { should_not allow_mass_assignment_of(:password_digest) }
 
+  describe "associatons" do
+    it { should have_many(:moderated_subs) }
+    it { should have_many(:authored_links) }
+    it { should have_many(:authored_comments) }
+  end
+
   describe "password" do
     it { should ensure_length_of(:password).is_at_least(6) }
     it "is a secure password" do

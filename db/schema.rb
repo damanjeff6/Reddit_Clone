@@ -11,7 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219192425) do
+ActiveRecord::Schema.define(:version => 20131220012649) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "link_id",           :null => false
+    t.integer  "parent_comment_id"
+    t.integer  "author_id",         :null => false
+    t.text     "body",              :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "comments", ["author_id"], :name => "index_comments_on_author_id"
+  add_index "comments", ["link_id"], :name => "index_comments_on_link_id"
+  add_index "comments", ["parent_comment_id"], :name => "index_comments_on_parent_comment_id"
+
+  create_table "links", :force => true do |t|
+    t.string   "title",        :null => false
+    t.string   "url",          :null => false
+    t.text     "text"
+    t.integer  "submitter_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "links", ["submitter_id"], :name => "index_links_on_submitter_id"
+  add_index "links", ["title"], :name => "index_links_on_title"
+  add_index "links", ["url"], :name => "index_links_on_url"
+
+  create_table "subs", :force => true do |t|
+    t.string   "name",         :null => false
+    t.integer  "moderator_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "subs", ["name"], :name => "index_subs_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "username",        :null => false
