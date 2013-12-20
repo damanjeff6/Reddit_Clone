@@ -4,6 +4,27 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
+  has_many(
+    :moderated_subs,
+    :primary_key => :id,
+    :foreign_key => :moderator_id,
+    :class_name  => "Sub"
+  )
+
+  has_many(
+    :submitted_links,
+    :primary_key => :id,
+    :foreign_key => :submitter_id,
+    :class_name => "Link"
+  )
+
+  has_many(
+    :authored_comments,
+    :primary_key => :id,
+    :foreign_key => :author_id,
+    :class_name => "Comment"
+  )
+
   validates :username, :password_digest, :session_token, :presence => true
   validates :password, :length => { :minimum => 6 } if :password_exists?
 

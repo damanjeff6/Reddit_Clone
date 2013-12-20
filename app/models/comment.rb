@@ -1,3 +1,6 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :link_id, :parent_comment_id
+
+  belongs_to :author, :class_name => "User"
+  belongs_to :link
+
 end

@@ -8,7 +8,7 @@ describe User do
 
   describe "associatons" do
     it { should have_many(:moderated_subs) }
-    it { should have_many(:authored_links) }
+    it { should have_many(:submitted_links) }
     it { should have_many(:authored_comments) }
   end
 
